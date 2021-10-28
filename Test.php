@@ -27,5 +27,5 @@ if ($conn->connect_error) {
 }
 echo "<br />";
 echo "connected successfully";
-
+echo "string";
  ?>
