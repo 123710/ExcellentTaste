@@ -12,13 +12,7 @@
     <!-- To ensure proper rendering and touch zooming -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style media="screen">
-      body{color: gray;}
-      .BackgroundImage {
-        background-image: url("Images/background.jpg");
-        /* background-position: center;
-        background-repeat: no-repeat; */
-        background-size: 100%;
-        /* position: relative; */
+      body{}
       }
     </style>
 
@@ -27,7 +21,7 @@
 
   </head>
 
-  <body class="BackgroundImage">
+  <body>
     <nav class="navbar navbar-inverse">
   <div class="container-fluid">
 
@@ -59,54 +53,32 @@ if ($conn->connect_error) {
   die("connection failed:" . $conn->connect_error);
 }
  ?>
-<!-- invul velden -->
-<div style="display: inline-block;float:left;font-size:17px;">
-  datum: <br><br>
-  tijd:<br><br>
-  klant_id: <br><br>
-  tafel_id:<br><br>
-  aantal: <br><br>
-</div>
-<div style="display: inline-block;">
-<form action="ReserveringenCreate.php" method="post">
-   <input type="text" name="datum" value="" required><br><br>
-   <input type="text" name="tijd" value="" required><br><br>
-   <input type="text" name="klant_id" value="" required><br><br>
-   <input type="text" name="tafel_id" value="" required><br><br>
-   <input type="text" name="aantal" value="" required><br><br>
-   <input style="color:black;" type="submit" name="create" value="create"><br><br>
-
-</div>
-</form>
+ <h1 style="text-align:center;">Bon Restaurant Excellent Taste</h1>
 <table>
   <tr>
     <th>id &nbsp;</th>
-    <th>datum &nbsp;</th>
-    <th>tijd &nbsp;</th>
-    <th>klant_id &nbsp;</th>
-    <th>tafel_id &nbsp;</th>
-    <th>aantal &nbsp;</th>
+    <th>reservering_id &nbsp;</th>
+    <th>bedrag &nbsp;</th>
+
   </tr>
 
 <?php
-include ("ReserveringenCreate.php");
-$sql = "SELECT * FROM reservering";
+
+
+$sql = "SELECT * FROM bon";
 $rs  = $conn->query($sql);
 while ($row = $rs->fetch_assoc()) {
 
-  echo "
+  echo "<tr'>
 
-  <tr style='background-color:rgb(204, 204, 0);'>
   <td>&nbsp;".$row['id']."</td>
-  <td>&nbsp;".$row['datum']."&nbsp;</td>
-  <td>&nbsp;".$row['tijd']."&nbsp;</td>
-  <td>&nbsp;".$row['klant_id']."&nbsp;</td>
-  <td>&nbsp;".$row['tafel_id']."&nbsp;</td>
-  <td>&nbsp;".$row['aantal']."&nbsp;</td>"
-;
+  <td>&nbsp;".$row['reservering_id']."&nbsp;</td>
+  <td>&nbsp;".$row['bedrag']."&nbsp;</td>
+    <td><button type='button' class='btn'>Afdrukken</button></td>
+"
 
-  echo '<td><a style="color:white;" href="ReserveringenUpdate.php?id='.$row['id'].'">Wijzigen</a>&nbsp;</td>';
-  echo '<td><a style="color:white;" href="ReserveringenDelete.php?id='.$row['id'].'">Verwijderen</a>&nbsp;</td>';
+;
+  echo '<td><a style="color:white;" href="Bon.php?id='.$row['id'].'">Print</a>&nbsp;</td>';
   echo "</tr>";
 }
  ?>
